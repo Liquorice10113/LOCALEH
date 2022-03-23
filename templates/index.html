@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EHLOCAL</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            transition: all ease-in-out 0.2s;
+        }
+
+        body {
+            width: 100%;
+            text-align: center;
+            color: #5C0D12;
+            background-color: #E3E0D1;
+        }
+
+        #container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            /* margin: 0 auto; */
+            text-align: center;
+            width: 82em;
+            height: auto;
+        }
+
+        .gallery {
+            border-radius: 0.6em;
+            position: relative;
+            margin: 1em 2em;
+            float: left;
+            width: 16.5em;
+            max-height: 28em;
+            padding-top: 0.55em;
+            padding-bottom: 0.55em;
+            text-decoration: none;
+        }
+        .gallery:hover {
+            background-color: #ffffffaa;
+            transform: scale(1.02);
+            box-shadow: 0em 0em 2em #00000099;
+        }
+
+        .thumb {
+            width: 16em;
+            max-height: 22.2em;
+            /* max-height: 18em; */
+            border-radius: 0.5em;
+            object-fit: cover;
+            border:1px solid #5C0D12;
+        }
+
+        .title {
+            overflow: hidden;
+            height: 2.8em;
+            min-width: 16em;
+            font-size: 0.7em;
+            color: #5C0D12;
+        }
+        #add{
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            height: 4em;
+            width: 20em;
+            /* background-color:cadetblue; */
+            border-radius: 10px 0 0 0;
+            border-top: 1px solid #5C0D12;
+            border-left: 1px solid #5C0D12;
+            line-height: 4em;
+            color: white;
+            /* transform: translateX(-50%); */
+        }
+        #url_in{
+            width: 15em;
+            height: 2em;
+            border: none;
+            border-bottom: 2px solid #5C0D12 ;
+            background-color: #ffffff66;
+        }
+        #submit{
+            height: 2.5em;
+            width: 2.5em;
+            border-radius: 1.5em;
+            border-style: none;
+            background-color: #5C0D12;
+            color: white;
+            font-size: 1em;
+            line-height: 1em;
+        }
+        .indicator{
+            position:absolute;
+            height: 5px;
+            width: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            background-color:#4caf50;
+            /* opacity: 0.5; */
+        }
+        .indicator0
+        {
+            background-color: #1976d2;
+        }
+        .indicator1
+        {
+            background-color: #fdd835;
+        }
+        .indicator2
+        {
+            background-color: #4caf50;
+        }
+        .indicator4
+        {
+            background-color: #64b5f6;
+        }
+        .indicator5
+        {
+            background-color: #d32f2f;
+        }
+        .indicator6
+        {
+            background-color: #64b5f6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        {% for gallery in galleries %}
+        <a class="gallery" href="/g/{{gallery['gid']}}">
+            <div class="title">
+                {{gallery['title']}}
+            </div>
+            <img class="thumb"
+                src="/s/{{gallery['thumb']}}" />
+                <div class="indicator indicator{{gallery['status']}}"></div>
+        </a>
+        {% endfor %}
+    </div>
+    <div id="add">
+        <form action="/add" method="post" target="nm_iframe">
+            <input type="text" id="url_in" name="url_in" />
+            <input type="submit" id="submit" value="+" />
+        </form>
+    </div>
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+</body>
+
+</html>

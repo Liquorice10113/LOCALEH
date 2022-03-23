@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            transition: all ease-in-out 0.2s;
+        }
+
+        body {
+            width: 100%;
+            text-align: center;
+            color: #5C0D12;
+            background-color: #E3E0D1;
+        }
+
+        #container {
+            position: absolute;
+            top: 6em;
+            left: 50%;
+            transform: translateX(-50%);
+            /* margin: 0 auto; */
+            text-align: center;
+            width: 82em;
+            height: auto;
+            padding-bottom: 6em;
+        }
+
+        .image {
+            border-radius: 0.6em;
+            position: relative;
+            margin: 1em 2em;
+            float: left;
+            width: 16.5em;
+            max-height: 26em;
+            padding-top: 0.55em;
+            padding-bottom: 0.55em;
+            text-decoration: none;
+        }
+        .image:hover {
+            background-color: #ffffffaa;
+            transform: scale(1.02);
+            box-shadow: 0em 0em 2em #00000099;
+        }
+
+        .thumb {
+            width: 16em;
+            max-height: 22.2em;
+            /* max-height: 18em; */
+            border-radius: 0.5em;
+            object-fit: cover;
+            border: 1px solid #5C0D12;
+        }
+
+        .title {
+            overflow: hidden;
+            height: 2.8em;
+            line-height: 2em;
+            min-width: 16em;
+            font-size: 0.7em;
+            color: #5C0D12;
+        }
+
+        .indicator {
+            position:absolute;
+            height: 5px;
+            width: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            background-color:#4caf50;
+            /* opacity: 0.5; */
+        }
+
+        .indicator0 {
+            background-color: #1976d2;
+        }
+
+        .indicator1 {
+            background-color: #fdd835;
+        }
+
+        .indicator2 {
+            background-color: #4caf50;
+        }
+
+        .indicator4 {
+            background-color: #64b5f6;
+        }
+
+        .indicator5 {
+            background-color: #d32f2f;
+        }
+
+        .indicator6 {
+            background-color: #64b5f6;
+        }
+
+        #index {
+            position: fixed;
+            bottom: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #index a {
+            /* margin: 0 1em; */
+            text-decoration: none;
+        }
+
+        .num {
+            float: left;
+            width: 2em;
+            margin: 0.3em 0.3em;
+            background-color: #ffffffaa;
+            border-radius: 0.5em;
+            color: #5C0D12;
+        }
+
+        .num_mute {
+            float: left;
+            width: 2em;
+            margin: 0.3em 0.3em;
+            border-radius: 0.5em;
+            color: #5C0D12;
+        }
+
+        .num:hover {
+            color: #ffffffaa;
+            background-color: #5C0D12;
+        }
+
+        #big_title {
+            position: absolute;
+            height: 6em;
+            padding-left: 2em;
+            padding-top: 1em;
+            font-size: 2em;
+        }
+
+        #big_title a {
+            text-decoration: none;
+        }
+
+        #big_title div {
+            margin-right: 1em;
+            float: left;
+            height: 1.4em;
+            width: 1.4em;
+            font-size: 1em;
+            border-radius: 1em;
+            line-height: 1.45em;
+            color: #5C0D12;
+        }
+        #big_title div:hover{
+            background-color: #ffffffaa;
+            box-shadow: 0em 0em 1em #00000099;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="big_title">
+        <a href="/"><div>←</div></a>{{title}}
+    </div>
+    <div id="container">
+        {% for image in images %}
+        <a class="image" href="/s/{{image['thumb']}}" target="_blank">
+            <div class="title">
+                {{image['title']}}
+            </div>
+            <img class="thumb" src="/s/{{image['thumb']}}" />
+            <div class="indicator indicator{{image['status']}}"></div>
+        </a>
+        {% endfor %}
+        <div id="index">
+            {% for i in range(cnt) %}
+            {% if i==p %}
+            <div class="num_mute">{{i}}</div>
+            {% else %}
+            <a href="/g/{{gid}}?p={{i}}">
+                <div class="num">{{i}}</div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
